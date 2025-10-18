@@ -1,13 +1,15 @@
 import type { ComponentProps } from "react";
 import { mergeClassNames } from "../../app/utils/mergeClassNames";
 
-type ButtonProps = ComponentProps<'button'>;
+interface ButtonProps extends ComponentProps<'button'> {
+  isLoading?: boolean;
+}
 
-export function Button({ className, ...props }: ButtonProps) {
-
+export function Button({ className, isLoading, disabled, ...props }: ButtonProps) {
   return (
     <button
       {...props}
+      disabled={isLoading || disabled}
       className={mergeClassNames(
         "bg-teal-900 hover:bg-teal-800 px-6 h-12 rounded-2xl text-white font-medium disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all",
         className
