@@ -1,6 +1,6 @@
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { forwardRef, type ComponentProps } from "react";
-import { mergeClassNames } from "../../app/utils/mergeClassNames";
+import { mergeClassNames } from "../../app/shared/strings/mergeClassNames";
 
 interface InputProps extends ComponentProps<'input'> {
   name: string;

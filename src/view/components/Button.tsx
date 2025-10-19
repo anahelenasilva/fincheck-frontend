@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { mergeClassNames } from "../../app/utils/mergeClassNames";
+import { mergeClassNames } from "../../app/shared/strings/mergeClassNames";
 import { Spinner } from "./Spinner";
 
 interface ButtonProps extends ComponentProps<'button'> {

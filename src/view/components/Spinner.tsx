@@ -1,4 +1,4 @@
-import { mergeClassNames } from "../../app/utils/mergeClassNames";
+import { mergeClassNames } from "../../app/shared/strings/mergeClassNames";
 
 interface SpinnerProps {
   className?: string;

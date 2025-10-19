@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { localStorageKeys } from '../config/localStorageKeys';
-import { sleep } from '../utils/sleep';
+import { sleep } from '../shared/sleep';
 
 export const httpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
