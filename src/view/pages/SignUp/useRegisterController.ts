@@ -28,7 +28,7 @@ export function useRegisterController() {
     resolver: zodResolver(schema),
   });
 
-  const { mutateAsync: signUp, isLoading } = useMutation({
+  const { mutateAsync, isLoading } = useMutation({
     mutationFn: async (data: SignupParams) => {
       return authService.signup(data)
     },
@@ -36,7 +36,7 @@ export function useRegisterController() {
 
   const handleSubmit = hookFormHandleSubmit(async (data) => {
     try {
-      const { accessToken } = await signUp(data);
+      const { accessToken } = await mutateAsync(data);
       console.dir(accessToken);
     } catch {
       toast.error('Ocorreu um erro ao criar a sua conta!');

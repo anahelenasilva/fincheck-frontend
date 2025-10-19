@@ -27,7 +27,7 @@ export function useLoginController() {
     resolver: zodResolver(schema),
   });
 
-  const { mutateAsync: signin, isLoading } = useMutation({
+  const { mutateAsync, isLoading } = useMutation({
     mutationFn: async (data: SigninParams) => {
       return authService.signin(data)
     },
@@ -35,7 +35,7 @@ export function useLoginController() {
 
   const handleSubmit = hookFormHandleSubmit(async (data) => {
     try {
-      const { accessToken } = await signin(data);
+      const { accessToken } = await mutateAsync(data);
       console.dir(accessToken);
     } catch {
       toast.error('Credenciais inválidas!');
