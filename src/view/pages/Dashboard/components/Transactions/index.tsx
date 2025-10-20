@@ -3,13 +3,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { MONTHS } from "../../../../../app/config/constants";
 import { formatCurrency } from "../../../../../app/shared/number/formatCurrency";
+import { mergeClassNames } from "../../../../../app/shared/strings/mergeClassNames";
 import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
 import { FilterIcon } from "../../../../components/icons/FilterIcon";
 import { TransactionsIcon } from "../../../../components/icons/TransactionsIcon";
 import { SliderNavigation } from "./SliderNavigation";
 import { SliderOption } from "./SliderOption";
+import { useTransactionsController } from "./useTransactionsController";
 
 export function Transactions() {
+  const { areValuesVisible } = useTransactionsController();
+
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
       <header>
@@ -58,7 +62,7 @@ export function Transactions() {
             </div>
           </div>
 
-          <span className="font-medium tracking-[-0.5px] text-red-800">
+          <span className={mergeClassNames("font-medium tracking-[-0.5px] text-red-800", !areValuesVisible && 'blur-sm')}>
             -{formatCurrency(123)}
           </span>
         </div>
@@ -73,7 +77,7 @@ export function Transactions() {
             </div>
           </div>
 
-          <span className="font-medium tracking-[-0.5px] text-green-800">
+          <span className={mergeClassNames("font-medium tracking-[-0.5px] text-green-800", !areValuesVisible && 'blur-sm')}>
             {formatCurrency(8000)}
           </span>
         </div>
