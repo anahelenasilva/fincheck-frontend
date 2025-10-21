@@ -26,7 +26,7 @@ export function DropdownMenuContent({ children, className }: DropdownMenuContent
   return (
     <RadixDropdownMenu.Portal>
       <RadixDropdownMenu.Content
-        className={mergeClassNames("rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]", className)}
+        className={mergeClassNames("rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] data-[side=bottom]:animate-slide-up-and-fade", className)}
       >
         {children}
       </RadixDropdownMenu.Content>
