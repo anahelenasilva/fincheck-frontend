@@ -1,4 +1,5 @@
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import { mergeClassNames } from '../../app/shared/strings/mergeClassNames';
 
 export function DropdownMenuRoot({ children }: { children: React.ReactNode }) {
   return (
@@ -10,25 +11,41 @@ export function DropdownMenuRoot({ children }: { children: React.ReactNode }) {
 
 export function DropdownMenuTrigger({ children }: { children: React.ReactNode }) {
   return (
-    <RadixDropdownMenu.Trigger>
+    <RadixDropdownMenu.Trigger className='outline-none'>
       {children}
     </RadixDropdownMenu.Trigger>
   );
 }
 
-export function DropdownMenuContent({ children }: { children: React.ReactNode }) {
+interface DropdownMenuContentProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function DropdownMenuContent({ children, className }: DropdownMenuContentProps) {
   return (
     <RadixDropdownMenu.Portal>
-      <RadixDropdownMenu.Content>
+      <RadixDropdownMenu.Content
+        className={mergeClassNames("rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]", className)}
+      >
         {children}
       </RadixDropdownMenu.Content>
     </RadixDropdownMenu.Portal>
   );
 }
 
-export function DropdownMenuItem({ children }: { children: React.ReactNode }) {
+interface DropdownMenuItemProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function DropdownMenuItem({ children, className }: DropdownMenuItemProps) {
   return (
-    <RadixDropdownMenu.Item>
+    <RadixDropdownMenu.Item
+      className={
+        mergeClassNames("min-h-[48px] outline-none flex items-center p-4 text-sm text-gray-800 data-[highlighted]:bg-gray-50 rounded-2xl transition-colors cursor-pointer", className)
+      }
+    >
       {children}
     </RadixDropdownMenu.Item>
   );
