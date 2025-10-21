@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { MONTHS } from "../../../../../app/config/constants";
 import { formatCurrency } from "../../../../../app/shared/number/formatCurrency";
 import { mergeClassNames } from "../../../../../app/shared/strings/mergeClassNames";
+import emptyStateImage from '../../../../../assets/empty-state.svg';
 import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
 import { FilterIcon } from "../../../../components/icons/FilterIcon";
 import { TransactionsIcon } from "../../../../components/icons/TransactionsIcon";
@@ -13,7 +14,11 @@ import { SliderOption } from "./SliderOption";
 import { useTransactionsController } from "./useTransactionsController";
 
 export function Transactions() {
-  const { areValuesVisible, isLoading } = useTransactionsController();
+  const {
+    areValuesVisible,
+    isLoading,
+    transactions,
+  } = useTransactionsController();
 
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
@@ -61,35 +66,48 @@ export function Transactions() {
           </header>
 
           <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-              <div className="flex-1 flex items-center gap-3">
-                <CategoryIcon type="expense" />
-
-                <div className="">
-                  <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
-                  <span className="text-sm text-gray-600">04/06/2025</span>
-                </div>
+            {transactions.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full">
+                <img src={emptyStateImage} alt="Empty State" />
+                <p className="text-gray-700">
+                  Não encontramos nenhuma transação!
+                </p>
               </div>
+            )}
 
-              <span className={mergeClassNames("font-medium tracking-[-0.5px] text-red-800", !areValuesVisible && 'blur-sm')}>
-                -{formatCurrency(123)}
-              </span>
-            </div>
+            {transactions.length > 0 && (
+              <>
+                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                  <div className="flex-1 flex items-center gap-3">
+                    <CategoryIcon type="expense" />
 
-            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-              <div className="flex-1 flex items-center gap-3">
-                <CategoryIcon type="income" />
+                    <div className="">
+                      <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
+                      <span className="text-sm text-gray-600">04/06/2025</span>
+                    </div>
+                  </div>
 
-                <div className="">
-                  <strong className="font-bold tracking-[-0.5px] block">Salário</strong>
-                  <span className="text-sm text-gray-600">01/06/2025</span>
+                  <span className={mergeClassNames("font-medium tracking-[-0.5px] text-red-800", !areValuesVisible && 'blur-sm')}>
+                    -{formatCurrency(123)}
+                  </span>
                 </div>
-              </div>
 
-              <span className={mergeClassNames("font-medium tracking-[-0.5px] text-green-800", !areValuesVisible && 'blur-sm')}>
-                {formatCurrency(8000)}
-              </span>
-            </div>
+                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                  <div className="flex-1 flex items-center gap-3">
+                    <CategoryIcon type="income" />
+
+                    <div className="">
+                      <strong className="font-bold tracking-[-0.5px] block">Salário</strong>
+                      <span className="text-sm text-gray-600">01/06/2025</span>
+                    </div>
+                  </div>
+
+                  <span className={mergeClassNames("font-medium tracking-[-0.5px] text-green-800", !areValuesVisible && 'blur-sm')}>
+                    {formatCurrency(8000)}
+                  </span>
+                </div>
+              </>
+            )}
           </div>
         </>
       )}
